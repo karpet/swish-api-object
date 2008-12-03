@@ -6,9 +6,11 @@ use Carp;
 use YAML::Syck ();
 use JSON::Syck ();
 
-our $VERSION = '0.12_01';
+our $VERSION = '0.12';
 
 sub VERSION {$VERSION}    # some MakeMaker's require this
+
+*next = \&next_result;
 
 sub next_result {
     my $self = shift;
@@ -31,22 +33,21 @@ sub _make_object {
     my %propvals;
 
     for my $p ( $sao->props ) {
-        my $m = $sao->properties->{$p};
-
-        if ( $class->can($m) ) {
-            $propvals{$p} = $class->$m($p);
-        }
-        else {
-            my $v = $result->property($p);
-            $propvals{$p}
-                = defined($v)
-                ? $self->deserialize( $sao->serial_format, $v )
-                : '';
-        }
+        my $m   = $sao->properties->{$p};
+        my $v   = $result->property($p);
+        my $key = $class->can($m) ? $m : $p;
+        $propvals{$key}
+            = defined($v)
+            ? $self->deserialize( $sao->serial_format, $v )
+            : '';
 
     }
 
-    return $class->new( \%propvals, $sao->stash );
+    if ( defined $sao->stash ) {
+        $propvals{$_} = $sao->stash->{$_} for keys %{ $sao->stash };
+    }
+
+    return $class->new( \%propvals );
 }
 
 sub deserialize {
@@ -98,9 +99,16 @@ L<SWISH::API::Object>
 
 =head1 METHODS
 
+
+=head2 next_result
+
 The internal SWISH::API::Object::Results class is used to extend the SWISH::API
 next_result() method with a next_result_after() method. See SWISH::API::More for
 documentation about how the *_after() methods work.
+
+=head2 next
+
+Aliased to next_result.
 
 =head2 deserialize( I<format>, I<prop_val> )
 

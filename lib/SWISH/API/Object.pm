@@ -5,7 +5,7 @@ use Carp;
 use base qw( SWISH::API::Stat );
 use SWISH::API::Object::Results;
 
-our $VERSION = '0.12_01';
+our $VERSION = '0.12';
 
 sub VERSION {$VERSION}    # some MakeMaker's require this
 
@@ -52,12 +52,11 @@ sub init {
     # this ISA trickery has 2 benefits:
     # (1) a default new() method
     # (2) easy accessor maker
-    unless ( $self->class->can('mk_accessors') ) {
+    unless ( $self->class->can('new') ) {
         no strict 'refs';
         push( @{ $self->class . '::ISA' }, 'Class::Accessor::Fast' );
+        $self->class->mk_accessors( keys %{ $self->properties } );
     }
-
-    $self->class->mk_accessors( keys %{ $self->properties } );
 
 }
 
@@ -159,6 +158,8 @@ format.
 
 Pass along any data you want to the Result object. Examples might include passing a DBI
 handle so your object could query a database directly based on some method you define.
+The stash value should be a hash reference, whose keys/values will be merged and supercede
+the properties values passed to the B<class> new() method.
 
 =item serial_format
 

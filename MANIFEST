@@ -11,4 +11,3 @@ t/yaml.html
 t/conf
 lib/SWISH/API/Object.pm
 lib/SWISH/API/Object/Results.pm
-META.yml                                 Module meta-data (added by MakeMaker)
