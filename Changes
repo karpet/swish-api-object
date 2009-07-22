@@ -40,4 +40,8 @@ Revision history for Perl extension SWISH::API::Object.
 0.12
     * refactor to actually support blessing into existing classes
     * added next() alias method to Results class
+
+0.13
+    * add more tests
+
  

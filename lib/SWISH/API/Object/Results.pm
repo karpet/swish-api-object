@@ -6,7 +6,7 @@ use Carp;
 use YAML::Syck ();
 use JSON::Syck ();
 
-our $VERSION = '0.12';
+our $VERSION = '0.13';
 
 sub VERSION {$VERSION}    # some MakeMaker's require this
 

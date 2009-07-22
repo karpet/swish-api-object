@@ -1,12 +1,12 @@
-use Test::More tests => 12;
+use Test::More tests => 13;
 
 SKIP: {
 
    eval { require SWISH::API  };
 
-   skip "SWISH::API is not installed - can't do More with it...", 12 if $@;
+   skip "SWISH::API is not installed - can't do More with it...", 13 if $@;
 
-   skip "SWISH::API 0.04 or higher required", 12 unless ($SWISH::API::VERSION && $SWISH::API::VERSION >= 0.04);
+   skip "SWISH::API 0.04 or higher required", 13 unless ($SWISH::API::VERSION && $SWISH::API::VERSION >= 0.04);
 
    require_ok('SWISH::API::Object');
 
@@ -29,6 +29,8 @@ ok(
 #diag(dump($swish));
 
 ok(my $results = $swish->query('json'), "query");
+
+is_deeply(['json'], [ $results->parsed_words($results->base->indexes->[0]) ], "parsed_words()" );
 
 while (my $object = $results->next_result)
 {

@@ -5,7 +5,7 @@ use Carp;
 use base qw( SWISH::API::Stat );
 use SWISH::API::Object::Results;
 
-our $VERSION = '0.12';
+our $VERSION = '0.13';
 
 sub VERSION {$VERSION}    # some MakeMaker's require this
 
