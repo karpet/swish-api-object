@@ -41,6 +41,8 @@ Revision history for Perl extension SWISH::API::Object.
     * refactor to actually support blessing into existing classes
     * added next() alias method to Results class
 
-0.13   xxx
+0.13   01 Feb 2010
     * add more tests
+    * swish_result now passed to all Result classes.
+    * default serialization changed to JSON
 

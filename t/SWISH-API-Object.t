@@ -11,5 +11,7 @@ SKIP: {
 
     require_ok('SWISH::API::Object');
 
+    diag("testing SWISH::API::Object version $SWISH::API::Object::VERSION");
+
 }
 

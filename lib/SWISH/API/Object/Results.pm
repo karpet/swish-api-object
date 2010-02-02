@@ -30,7 +30,7 @@ sub _make_object {
     my $sao   = $self->base;
     my $class = $sao->class;
 
-    my %propvals;
+    my %propvals = ( swish_result => $result );
 
     for my $p ( $sao->props ) {
         my $m   = $sao->properties->{$p};
@@ -98,7 +98,6 @@ SWISH::API::Object::Results is used internally by SWISH::API::Object.
 L<SWISH::API::Object>
 
 =head1 METHODS
-
 
 =head2 next_result
 
