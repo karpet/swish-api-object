@@ -46,3 +46,6 @@ Revision history for Perl extension SWISH::API::Object.
     * swish_result now passed to all Result classes.
     * default serialization changed to JSON
 
+0.14   22 July 2015
+    * remote VERISON() sub to fix https://rt.cpan.org/Ticket/Display.html?id=105726
+
